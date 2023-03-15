@@ -1,39 +1,28 @@
 <?php
 
 /* use Illuminate\Http\Request; */
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
-Route::get | post | delete | put
+En este caso, lo que va justo después de PageController::class es el nombre del método al que se tiene que acceder.
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name("home");
+/* 
+Route::get('/', [PageController::class, 'home'])->name("home");
 
-Route::get('blog', function () {
-    /* Se supone que esta variable $posts simula un llamado a una API */
-    $posts = [
-        ["id"=>1, "title"=>"Cute programming language", "slug"=>"PHP"],
-        ["id"=>2, "title"=>"Cute framework", "slug"=>"Laravel"]
-    ];
+Route::get('blog',[PageController::class, 'blog'])->name("blog");
 
-    /* Argumentos --> 
-    "blog" como la vista que se va a renderizar.
-    "posts" con comillas, como el nombre de la variable que va a recibir
-    *último argumento* como la variable que va a ingresar. En este caso un array asociativo.
-    */
+Route::get('blog/{slug}', [PageController::class, 'post'])->name("post");
+ */
 
-    return view("blog", ["posts" => $posts]);
-})->name("blog");
+// Para no escribir el controlador en cada linea podemos juntarlo todo en un grupo. 
+Route::controller(PageController::class)->group(function () {
 
-Route::get('blog/{slug}', function ($slug) {
-    // consulta a base de datos
-    $post = $slug;
-     
-    return view("post", ["post" => $post]);
-})->name("post");
+    Route::get('/', 'home')->name("home");
 
-/* Route::get('buscar', function (Request $request) {
-    return $request->all();
-}); */
+    Route::get('blog','blog')->name("blog");
+    
+    Route::get('blog/{slug}','post')->name("post");
+
+});
