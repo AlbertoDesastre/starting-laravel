@@ -9,13 +9,13 @@ Route::get | post | delete | put
 
 Route::get('/', function () {
     return view('home');
-});
+})->name("home");
 
 Route::get('blog', function () {
     /* Se supone que esta variable $posts simula un llamado a una API */
     $posts = [
-        ["id"=>1, "title"=>"Cute cat", "slug"=>"PHP"],
-        ["id"=>2, "title"=>"Perro feo", "slug"=>"Laravel"]
+        ["id"=>1, "title"=>"Cute programming language", "slug"=>"PHP"],
+        ["id"=>2, "title"=>"Cute framework", "slug"=>"Laravel"]
     ];
 
     /* Argumentos --> 
@@ -25,14 +25,14 @@ Route::get('blog', function () {
     */
 
     return view("blog", ["posts" => $posts]);
-});
+})->name("blog");
 
 Route::get('blog/{slug}', function ($slug) {
     // consulta a base de datos
     $post = $slug;
      
     return view("post", ["post" => $post]);
-});
+})->name("post");
 
 /* Route::get('buscar', function (Request $request) {
     return $request->all();
