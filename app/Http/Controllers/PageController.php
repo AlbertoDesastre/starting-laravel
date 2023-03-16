@@ -4,6 +4,7 @@
 // Hay que copiar y pegar esto, copiando el nombre del controlador al final, para acceder a él.
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -15,11 +16,12 @@ class PageController extends Controller
 
     public function blog()
     {
-        /* Se supone que esta variable $posts simula un llamado a una API */
-        $posts = [
-            ["id"=>1, "title"=>"Cute programming language", "slug"=>"PHP"],
-            ["id"=>2, "title"=>"Cute framework", "slug"=>"Laravel"]
-        ];
+        /* Eloquent es una tecnologia ORM, solo que en Laravel se llama de esa forma.
+        Permite acceder a las clases de Laravel como si fuesen objetos.
+        
+        ORM: 
+        */
+        $posts = Post::get();
 
         /* Argumentos --> 
         "blog" como la vista que se va a renderizar.
@@ -30,11 +32,8 @@ class PageController extends Controller
         return view("blog", ["posts" => $posts]);
     }
 
-    public function post($slug)
+    public function post(Post $post)
     {
-       // consulta a base de datos
-       $post = $slug;
-     
        return view("post", ["post" => $post]);
     }
 }
