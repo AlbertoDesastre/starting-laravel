@@ -18,7 +18,7 @@ Route::get('blog/{slug}', [PageController::class, 'post'])->name("post");
 
 // Para no escribir el controlador en cada linea podemos juntarlo todo en un grupo. 
 Route::controller(PageController::class)->group(function () {
-
+    /* El primer argumento de la Route es la dirección de la página, y el segundo argumento el nombre del método, que viene deL PageController */
     Route::get('/', 'home')->name("home");
 
     Route::get('blog','blog')->name("blog");
