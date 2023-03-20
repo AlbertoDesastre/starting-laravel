@@ -16,6 +16,10 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             
+            // Creo la relación con otra tabla en la DB. Luego voy a Factory a crear precisamente este id.
+            $table->unsignedBigInteger("user_id");
+            $table->foreign("user_id")->references("id")->on("users");
+
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('body');

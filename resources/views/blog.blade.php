@@ -11,6 +11,9 @@
         <a href="{{ route('post', $post->slug) }}"> 
           {{ $post->title }} 
         </a>
+        <br>
+        <!-- De alguna manera, aquí hace la query con Join, a la tabla usuario con Id X, y escoge únicamente su nombre -->
+        <span> {{$post->user->name}} </span>
       </p>
     @endforeach 
     

@@ -31,7 +31,7 @@ class PageController extends Controller
 
         $posts = Post::latest()->paginate();
 
-        dd($posts);
+        //dd($posts);
 
         /* Argumentos --> 
         "blog" como la vista que se va a renderizar.
