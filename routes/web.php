@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 
 /*
 En este caso, lo que va justo después de PageController::class es el nombre del método al que se tiene que acceder.
@@ -19,5 +20,8 @@ Route::controller(PageController::class)->group(function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// Cuando a una ruta se le llama el método estático "resource", le da muchas más opciones de routing
+Route::resource('posts', PostController::class)->except(["show"]);
 
 require __DIR__.'/auth.php';
