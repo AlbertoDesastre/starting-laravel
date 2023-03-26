@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center justify-between">
             {{ __('Posts') }}
 
-            <a href="{{ route('posts.create') }}">Create</a>
+            <a href="{{ route('posts.create') }}" class="text-xs bg-gray-800 text-white rounded px-2 py-1">Create</a>
         </h2>
     </x-slot>
 
