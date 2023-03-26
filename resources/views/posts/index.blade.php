@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
+                    {{-- Agrego las primeras clases de Tailwind y la paginación. Renderizo las propiedades que tengo en mi BD.--}}
                     <table class="mb-4">
                      @foreach ( $posts as $post )
                       <tr class="border-b border-gray-200 text-sm">
