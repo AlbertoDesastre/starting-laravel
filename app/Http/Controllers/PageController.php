@@ -21,7 +21,17 @@ class PageController extends Controller
         
         ORM: 
         */
-        $posts = Post::get();
+        
+        // Diferentes métodos del ORM listados aquí abajo:
+        // $posts = Post::get();
+        // $post = Post::first();
+        // $post = Post::find(25);
+
+        //dd($post);
+
+        $posts = Post::latest()->paginate();
+
+        //dd($posts);
 
         /* Argumentos --> 
         "blog" como la vista que se va a renderizar.
@@ -37,3 +47,5 @@ class PageController extends Controller
        return view("post", ["post" => $post]);
     }
 }
+
+
