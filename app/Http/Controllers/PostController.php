@@ -26,6 +26,8 @@ class PostController extends Controller
         // La validación básica proviene de la Clase request. Se le pasa las variables a validar y el nombre de la validación.
         $request->validate([
             "title" => 'required',
+            // quiero que sea único, específicamente en la tabla post, específicamente la columna slug
+            "slug" => "required|unique:posts,slug" ,
             "body" => "required"
         ]);
         // Desarrollo el post a partir del user que se encuentra logeado. Esa info del user se encuentra dentro de la clase Request.
@@ -33,10 +35,10 @@ class PostController extends Controller
         Esto significa que cuando intente acceder a ese método saltará un error. Es tan sencillo como incluir ahora el método
         al que intento acceder un poco más abajo. */
         $post = $request->user()->posts()->create([
-            "title" => $title = $request->title,
+            "title" => $request->title,
             // Aqui vuelvo a utilizar el helper Str para hacer una URL amigable. Siempre que uso un
             // helper de este tipo tengo que importarlo.
-            "slug" => Str::slug($title),
+            "slug" => $request->slug,
             "body" => $request->body
         ]);
 
@@ -52,11 +54,14 @@ class PostController extends Controller
     public function update(Request $request, Post $post){
         $request->validate([
             "title" => 'required',
+            // "Revisa esta validación pero ignórame al mismo tiempo"
+            "slug" => "required|unique:posts,slug," . $post->id,
             "body" => "required"
         ]);
-        $post->update([
-            "title" => $title = $request->title,
-            "slug" => Str::slug($title),
+
+        $post -> update([
+            "title" => $request->title,
+            "slug" => $request->slug,
             "body" => $request->body
         ]);
 
