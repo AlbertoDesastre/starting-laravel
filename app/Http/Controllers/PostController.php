@@ -23,6 +23,11 @@ class PostController extends Controller
 
     // Como necesito recuperar lo que me envía un usuario lo recupero con Request
     public function store(Request $request){
+        // La validación básica proviene de la Clase request. Se le pasa las variables a validar y el nombre de la validación.
+        $request->validate([
+            "title" => 'required',
+            "body" => "required"
+        ]);
         // Desarrollo el post a partir del user que se encuentra logeado. Esa info del user se encuentra dentro de la clase Request.
         /* OJO! En el momento en el que escribo este comentario el método "posts" no existe en el modelo Usuario.
         Esto significa que cuando intente acceder a ese método saltará un error. Es tan sencillo como incluir ahora el método
@@ -45,6 +50,10 @@ class PostController extends Controller
     }
 
     public function update(Request $request, Post $post){
+        $request->validate([
+            "title" => 'required',
+            "body" => "required"
+        ]);
         $post->update([
             "title" => $title = $request->title,
             "slug" => Str::slug($title),
